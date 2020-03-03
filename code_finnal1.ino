@@ -1,9 +1,15 @@
 #include <Servo.h>
+//le crochet de la crémaillère toure de 90 degré
+Servo myservo;  // create servo object to control a servo
+// twelve servo objects can be created on most boards
+
+  
 
 // --- les variables : déclaration et initialisation
-
-Servo myservo;  
-int pos1 = 0;    // position du servo sur le crochet de la crémaillère
+int pos1 = 0; // crochets 
+int b = 90;   // ang crochets
+int pos2 = 0;  // crochet crémaillère
+int a = 90;   // ang croh cré
 int E2 = 6;    //M2 : vitesse du moteur M2
 int M2 = 7;    //M2 Direction : horaire/anti-horaire
 int pinTrig1 = 2;
@@ -12,8 +18,10 @@ int pinTrig2 = 4;
 int pinEcho2 = 5;
 long temps; 
 float distance;
-const int sensorMin = 0;
+const int sensorMin=0;
 const int sensorMax = 600;
+const int sensorMin1=0;
+const int sensorMax1= 600;
  
 
 
@@ -32,102 +40,37 @@ void setup() {
    Serial.begin(9600);
 }
 
-
-
 void loop() {
- 
- //le crochet de la crémaillère tourne de 90 degré
-  for (pos = 0; pos <= 90; pos += 1) { // goes from 0 degrees to 180 degrees
-    // in steps of 1 degree
-    myservo.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15ms for the servo to reach the position
-  }
- 
- //DECENTE 
- //le capteur ultrason dectecte le bareau (capteur du bas)
-    float distance = ultra_son1();
- // si la distance est plus petite que 1cm le moteur s'arrete. Le crochet sur la crémaillère tourne 
-  if (distance < 1 ) {
-       stopped();
-   //code pour les 2 autres crOCHET 
-       for (pos = 90; pos >= 0; pos -= 1) {
-       myservo.write(pos);              
-       delay(15);}
-       delay(10000);
-       avance()
-    }
- 
- //sinon le moteur tourne
-  else {
-     avance();
-      }
- 
-// code du capteur de fin de course 
- 
-   long sensorReading1 = digitalRead(13);
-  //map the sensor range to a range of four option:
-  int range = map( sensorReading, sensorMin, sensorMax, 0, 3);
+  char c = capteur_fin_de_course1();
+  if( c == "pas allumé"){
+  descente_crochets();
+  descente_cremaillere();}
 
-  switch (sensorReading) {
-    case 0:    // your hand is on the sensor
-      Serial.println("allumé");
-      break;
-    case 1:    // your hand is nowhere near the sensor
-      Serial.println("pas allumé");
-      break;
-   case 2:
-      Serial.println("pas allumé");
-      break;
-   case 3;
-      Serial.println("pas allumé");
-      break;
-    
-  }
-  delay(1);
- 
- //Si le capteur de fin de course détecte la fin de l'échelle le moteur s'arrete le temps de déposer la charge. 
- //Une fois la charge déposée le moteur tourne dans le sens opposée.
- 
-  if( range == case 0){
+  else{
     stopped();
-    delay(60000);
-    back_off(155,155);
+    delay(10000);
   }
- //la montée 
-  float distance = ultra_son2();
-  if (distance < 1 ) {
-    stopped();
-   for (pos = 90; pos >= 0; pos -= 1) {
-       myservo.write(pos);              
-       delay(15);}
-    delay(10000); 
-   
-    }
-  else {
-     avance();
-      }
+}
 
-  
- 
- 
 // --- Les fonctions -----
- 
- 
-void avance()  {                       // AVANCE
+void avance()  { // AVANCE
   analogWrite (E2,100);    
   digitalWrite(M2,HIGH);
 }  
-void stopped()  {                     //ARRET
+
+void stopped() {
   Serial.println("STOP");
   digitalWrite(E2,0);
 }
-void back_off (char a,char b) {              //CHANGEMENT DE SENS
+
+void back_off (char a,char b) {
   Serial.println("ARRIERE");
   analogWrite (E2,b);
   digitalWrite(M2,LOW);
 }
-float ultra_son1() {
-  digitalWrite(pinTrig1, HIGH);            //fonction qui rencoit la distance captée par le capteur ultrason1
+
+
+float ultra_son1() {digitalWrite(pinTrig1, HIGH);
   delayMicroseconds(10);
   digitalWrite(pinTrig1, LOW);
 
@@ -147,8 +90,8 @@ float ultra_son1() {
   return distance;
   
 }
-float ultra_son2() {                           //fonction qui rencoit la distance captée par le capteur ultrason1
- digitalWrite(pinTrig2, HIGH);
+
+float ultra_son2() {digitalWrite(pinTrig2, HIGH);
   delayMicroseconds(10);
   digitalWrite(pinTrig2, LOW);
 
@@ -162,39 +105,116 @@ float ultra_son2() {                           //fonction qui rencoit la distanc
     Serial.print("Distance: ");
     Serial.print(distance);
     Serial.println(" cm");
+    
   }
   delay(2000);
   return distance;
- 
- 
- // j'ai préférée pas toucher au code du haut 
- // j'ai juste créer 2 fonctions montée et décente quand elles seront complete je pense u'on peut mettre que ça dans void loop :)
- void decente(){
-  float distance == ultra_son1();
-   // si la distance est plus petite que 1cm le moteur s'arrete.
+  
+}
+
+char capteur_fin_de_course1(){
+  long sensorReading = digitalRead(13);
+  //map the sensor range to a range of four option:
+  int range = map( sensorReading,sensorMin, sensorMax, 0, 3);
+
+  switch (sensorReading) {
+    case 0:    // your hand is on the sensor
+      Serial.println("allumé");
+      return "allumé";
+      break;
+    case 1:    // your hand is nowhere near the sensor
+      Serial.println("pas allumé");
+      return "pas allumé";
+      break;
+    case 2:
+      Serial.println("pas allumé");
+      return "pas allumé";
+      break;
+    case 3:
+     Serial.println("pas allumé");
+     return "pas allumé";
+      break;
+    
+  }
+  delay(1);
+   }
+
+char capteur_fin_de_course2(){
+  long sensorReading1 = digitalRead(12);
+  //map the sensor range to a range of four option:
+  int range = map( sensorReading1,sensorMin1, sensorMax1, 0, 3);
+
+  switch (sensorReading1) {
+    case 0:    // your hand is on the sensor
+      Serial.println("allumé");
+      return "allumé";
+      break;
+    case 1:    // your hand is nowhere near the sensor
+      Serial.println("pas allumé");
+      return "pas allumé";
+      break;
+    case 2:
+      Serial.println("pas allumé");
+      return "pas allumé";
+      break;
+    case 3:
+     Serial.println("pas allumé");
+     return "pas allumé";
+      break;
+    
+  }
+  delay(1);
+   }
+void retraction_crochet_cremaillere(){
+   for (pos2 = 0; pos2 <= a; pos2+= 1) { 
+    myservo.write(pos2);              
+    delay(15);  }
+  
+  }
+  
+void retraction_crochets(){
+  for (pos1 = 0; pos1 <= b; pos1 += 1) { 
+    myservo.write(pos1);              
+    delay(15);  }
+  
+}
+void retourne_crochets(){  
+  for (pos1 = b; pos1 >= 0; pos1 -= 1) { 
+    myservo.write(pos1);              
+    delay(15);}
+  }
+
+void retourne_crochet_cremaillere(){
+  for (pos2 = a; pos2 >= 0; pos2 -= 1) { 
+    myservo.write(pos2);              
+    delay(15);}
+  }
+
+void descente_crochets(){
+  retraction_crochets();
+  float distance = ultra_son1();
   if (distance < 1 ) {
     stopped();
-    delay(10000);  
+    delay(10000); 
+    retourne_crochets();
     }
- //sinon le moteur tourne
   else {
      avance();
-      }
-  
-  
- }
- 
- void monte(){
-  float distance == ultra_son2();
-   // si la distance est plus petite que 1cm le moteur s'arrete.
-  if (distance < 1 ) {
+}}
+void descente_cremaillere(){
+  retraction_crochet_cremaillere();
+  float distance = ultra_son2();
+  if(distance<1){
     stopped();
-    delay(10000);  
-    }
- //sinon le moteur tourne
-  else {
-     avance();
-      }
-  
- }
+    delay(10000);
+    retourne_crochet_cremaillere(); 
+  }
+  else{
+    back_off(155,155);
+  }
+ 
+}
+
+
+
   
