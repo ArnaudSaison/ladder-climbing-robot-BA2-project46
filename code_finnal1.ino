@@ -3,7 +3,7 @@
 // --- les variables : déclaration et initialisation
 
 Servo myservo;  
-int pos = 0;    // variable to store the servo position
+int pos1 = 0;    // position du servo sur le crochet de la crémaillère
 int E2 = 6;    //M2 : vitesse du moteur M2
 int M2 = 7;    //M2 Direction : horaire/anti-horaire
 int pinTrig1 = 2;
@@ -44,11 +44,17 @@ void loop() {
  
  //le capteur ultrason dectecte le bareau.
     float distance = ultra_son1();
- // si la distance est plus petite que 1cm le moteur s'arrete.
+ // si la distance est plus petite que 1cm le moteur s'arrete. Le crochet sur la crémaillère tourne 
   if (distance < 1 ) {
-    stopped();
-    delay(10000);  
+       stopped();
+   //code pour les 2 autres crochets
+       for (pos = 90; pos >= 0; pos -= 1) {
+       myservo.write(pos);              
+       delay(15);}
+       delay(10000);
+       avance()
     }
+ 
  //sinon le moteur tourne
   else {
      avance();
@@ -82,7 +88,11 @@ void loop() {
   float distance = ultra_son2();
   if (distance < 1 ) {
     stopped();
-    delay(10000);  
+   for (pos = 90; pos >= 0; pos -= 1) {
+       myservo.write(pos);              
+       delay(15);}
+    delay(10000); 
+   
     }
   else {
      avance();
@@ -148,7 +158,7 @@ float ultra_son2() {                           //fonction qui rencoit la distanc
   return distance;
  
  
- // j'ai préférée pas touvher au code du haut 
+ // j'ai préférée pas toucher au code du haut 
  // j'ai juste créer 2 fonctions montée et décente quand elles seront complete je pense u'on peut mettre que ça dans void loop :)
  void decente(){
   float distance == ultra_son1();
