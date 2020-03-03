@@ -4,79 +4,42 @@
 
 #include <Servo.h>
 //le crochet de la crémaillère toure de 90 degré
-Servo myservo;  // create servo object to control a servo
+Servo myservo1;// create servo object to control a servo
+Servo myservo2;
 // twelve servo objects can be created on most boards
 
-int pos = 0;    // variable to store the servo position
 // --- les variables : déclaration et initialisation
 
-Servo myservo;  
-int pos = 0;    // variable to store the servo position
+int pos1 = 0;// variable to store the servo position
+int pos2 = 0;
 int E2 = 6;    //M2 : vitesse du moteur M2
 int M2 = 7;    //M2 Direction : horaire/anti-horaire
 int pinTrig1 = 2;
+int pinEcho1 = 3;
+int pinTrig2 = 4;
+int pinEcho2 = 5;
 const int sensorMin = 0;      // sensor minimum, discovered through experiment
 const int sensorMax = 600;    // sensor maximum, discovered through experiment
+int angle_servo1=90;
+int angle_servo2=90;
+long temps;
+float distance;
 
 void setup() {
-   Serial.begin(9600);
+   myservo1.attach(7);
+   myservo2.attach(9);
+   pinMode(pinTrig1, OUTPUT);
+   pinMode(pinEcho1, INPUT);
+   pinMode(pinTrig2, OUTPUT);
+   pinMode(pinEcho2, INPUT);
+
+   digitalWrite(pinTrig1, LOW);
+   digitalWrite(pinTrig2, LOW);
+
+   Serial.begin(9600);   
 }
 
-
-
-void loop() {
-
- //le crochet de la crémaillère tourne de 90 degré
-  for (pos = 0; pos <= 90; pos += 1) { // goes from 0 degrees to 180 degrees
-    // in steps of 1 degree
-    myservo.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15ms for the servo to reach the position
-  }
-// montée
-//le capteur ultrason dectecte le bareau.
-    float distance = ultra_son1();
- // si la distance est plus petite que 1cm le moteur s'arrete.
-  if (distance < 1 ) {
-    stopped();
-    delay(10000);  
-    }
- //sinon le moteur tourne
-  else {
-     avance();
-      }
-    // put your main code here, to run repeatedly:
-//read the sensor;
-
-// code du capteur de fin de course 
-
-   long sensorReading1 = digitalRead(13);
-  //map the sensor range to a range of four option:
-  int range = map( sensorReading,0);
-void loop() {
-      break;
-  }
-  delay(1);
-
-
- //Si le capteur de fin de course détecte la fin de l'échelle le moteur s'arrete le temps de déposer la charge. 
- //Une fois la charge déposée le moteur tourne dans le sens opposée.
-
-  if( range == case 0){
-    stopped();
-    delay(60000);
-    back_off(155,155);
-  }
- //la montée 
-  float distance = ultra_son2();
-  if (distance < 1 ) {
-    stopped();
-    void loop() {
-      }
-
-
-
-
-// --- Les fonctions -----
+  // --- Les fonctions -----
 
 void avance()  {                       // AVANCE
   analogWrite (E2,100);    
@@ -99,11 +62,11 @@ float ultra_son1() {                           //fonction qui rencoit la distanc
   temps = pulseIn(pinEcho1, HIGH);
 
   if (temps > 25000){
-    Serial.print("Echec de la mesure")
-    distance = 10000
+    Serial.print("Echec de la mesure");
+    distance = 10000;
   }
   else{
-    temps = temps/2
+    temps = temps/2;
     distance = (temps*340)/10000.0;
     Serial.print("Distance: ");
     Serial.print(distance);
@@ -121,10 +84,10 @@ float ultra_son2() {                           //fonction qui rencoit la distanc
   temps = pulseIn(pinEcho2, HIGH);
 
   if (temps > 25000){
-    Serial.print("Echec de la mesure")
+    Serial.print("Echec de la mesure");
   }
   else{
-    temps = temps/2
+    temps = temps/2;
     distance = (temps*340)/10000.0;
     Serial.print("Distance: ");
     Serial.print(distance);
@@ -161,10 +124,37 @@ char fin_couse(){
 
  // j'ai préférée pas touvher au code du haut 
  // j'ai juste créer 2 fonctions montée et décente quand elles seront complete je pense u'on peut mettre que ça dans void loop :)
- 
- 
+
+void retraction_crocher_cremaillere(){
+   for (pos1 = 0; pos1 <= angle_servo1; pos1 += 1) { // goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    myservo1.write(pos1);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15ms for the servo to reach the position
+  }
+}
+void retraction_crochers(){
+   for (pos2 = 0; pos2 <= angle_servo2; pos2 += 1) { // goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    myservo2.write(pos2);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15ms for the servo to reach the position
+  }
+}
+void retourne_crocher_cremaillere(){
+   for (pos1 = 0; pos1=0; pos1 += 1) { // goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    myservo1.write(pos1);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15ms for the servo to reach the position
+  }
+}
+void retourne_crochers(){
+   for (pos2 = 0; pos2 = 0; pos2 += 1) { // goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    myservo2.write(pos2);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15ms for the servo to reach the position
+  }
+}
  void decente(){
-  float distance == ultra_son1();
+  float distance = ultra_son1();
    // si la distance est plus petite que 1cm le moteur s'arrete.
   if (distance < 1 ) {
     stopped();
@@ -177,7 +167,7 @@ char fin_couse(){
  }
 
  void monte(){
-  float distance == ultra_son2();
+  float distance = ultra_son2();
    // si la distance est plus petite que 1cm le moteur s'arrete.
   if (distance < 1 ) {
     stopped();
@@ -188,4 +178,12 @@ char fin_couse(){
      avance();
       }
  }
-}
+
+void loop() {
+  
+  
+  }
+
+
+
+
