@@ -12,6 +12,8 @@ int pinTrig2 = 4;
 int pinEcho2 = 5;
 long temps; 
 float distance;
+const int sensorMin = 0;
+const int sensorMax = 600;
  
 
 
@@ -41,13 +43,13 @@ void loop() {
     delay(15);                       // waits 15ms for the servo to reach the position
   }
  
- 
- //le capteur ultrason dectecte le bareau.
+ //DECENTE 
+ //le capteur ultrason dectecte le bareau (capteur du bas)
     float distance = ultra_son1();
  // si la distance est plus petite que 1cm le moteur s'arrete. Le crochet sur la crémaillère tourne 
   if (distance < 1 ) {
        stopped();
-   //code pour les 2 autres crochets
+   //code pour les 2 autres crOCHET 
        for (pos = 90; pos >= 0; pos -= 1) {
        myservo.write(pos);              
        delay(15);}
@@ -64,15 +66,22 @@ void loop() {
  
    long sensorReading1 = digitalRead(13);
   //map the sensor range to a range of four option:
-  int range = map( sensorReading,0);
+  int range = map( sensorReading, sensorMin, sensorMax, 0, 3);
 
-  switch (range) {
+  switch (sensorReading) {
     case 0:    // your hand is on the sensor
       Serial.println("allumé");
       break;
     case 1:    // your hand is nowhere near the sensor
       Serial.println("pas allumé");
       break;
+   case 2:
+      Serial.println("pas allumé");
+      break;
+   case 3;
+      Serial.println("pas allumé");
+      break;
+    
   }
   delay(1);
  
