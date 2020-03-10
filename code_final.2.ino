@@ -3,18 +3,20 @@
   
 
 // --- les variables : déclaration et initialisation
+
+
 Servo myservo; 
 Servo myservo2;
-int pos1 = 0;   //positions des crochets 
-int b = 180;   // angle des crochets
-int pos2 = 0;  //  postion du crochet crémaillère
-int a = 90;   // ang crochet cré
-int E2 = 6;    //M2 : vitesse du moteur M2
-int M2 = 7;    //M2 Direction : horaire/anti-horaire
-int pinTrig1 = 2; //capteur ultrason1
-int pinEcho1 = 3; //capteur ultrason1
-int pinTrig2 = 4;  //capteur ultrason2
-int pinEcho2 = 5; //capteur ultrason 2
+int pos1 = 0;                             //positions des crochets 
+int b = 180;                              // angle des crochets
+int pos2 = 0;                             //  postion du crochet crémaillère
+int a = 90;                               // ang crochet cré
+int E2 = 6;                               //M2 : vitesse du moteur M2
+int M2 = 7;                               //M2 Direction : horaire/anti-horaire
+int pinTrig1 = 2;                         //capteur ultrason1
+int pinEcho1 = 3;                         //capteur ultrason1
+int pinTrig2 = 4;                         //capteur ultrason2
+int pinEcho2 = 5;                         //capteur ultrason 2
 long temps; 
 float distance;
 const int sensorMin=0;
@@ -44,14 +46,20 @@ void setup() {
 void loop() {
   while(capteur_fin_de_course1()== "pas allumé" and capteur_fin_de_course2() == "pas allumé"){     //le capteur de fin de course2 est celui qui se trouve à la fin de la crémaillère
                                                                                                    // le capteur de fin de course1 est celui qui se trouve au dessus de la crémaillère
-  descente_crochets(); // décente des crochets
-  descente_cremaillere(); // décente de la crémaillère
+  descente_crochets();    // décente des crochets
+    
+  descente_cremaillere();   // décente de la crémaillère
   }
   stopped();
   delay(10000);
+  
+  
   if (capteur_fin_de_course2() == "allumé"){ //si le capteur de fin de course 2 a été allumé alors on rentre dans la boucle de la montée. 
+    
   while(capteur_fin_de_course1()== "pas allumé"){ // boucle de la montée tant que le capteur de fin de course 1 n'est pas allumé
+    
   monte_cremaillere(); //montée de la crémaillère
+    
   monte_crochets(); // montée des crochets
   }
   }
@@ -101,6 +109,7 @@ float ultra_son1() {digitalWrite(pinTrig1, HIGH);  // cette fonction nous revoit
   
 }
 
+
 float ultra_son2() {digitalWrite(pinTrig2, HIGH); // cette fonction nous revoit la distance que capte le capteur ultrason  2
   delayMicroseconds(10);
   digitalWrite(pinTrig2, LOW);
@@ -121,6 +130,7 @@ float ultra_son2() {digitalWrite(pinTrig2, HIGH); // cette fonction nous revoit 
   return distance;
   
 }
+
 
 char capteur_fin_de_course1(){   //cette fonction nous renvoit si le capteur de fin de course 1 est allumé ou non 
   long sensorReading = digitalRead(13);
@@ -149,6 +159,7 @@ char capteur_fin_de_course1(){   //cette fonction nous renvoit si le capteur de 
   delay(1);
    }
 
+
 char capteur_fin_de_course2(){                     //cette fonction nous renvoit si le capteur de fin de course  2 est allumé ou non 
   long sensorReading1 = digitalRead(12);
   //map the sensor range to a range of four option:
@@ -175,6 +186,8 @@ char capteur_fin_de_course2(){                     //cette fonction nous renvoit
   }
   delay(1);
    }
+
+
 void retraction_crochet_cremaillere(){      //cette fonction sert à rétracter le crochet de la crémaillère ( grace au servo moteur  2)
    for (pos2 = 0; pos2 <= a; pos2+= 1) { 
     myservo2.write(pos2);              
@@ -182,6 +195,7 @@ void retraction_crochet_cremaillere(){      //cette fonction sert à rétracter 
   
   }
   
+
 void retraction_crochets(){                //cette fonction sert à rétracter les crochets  ( grace au servo moteur 1)
   for (pos1 = 0; pos1 <= b; pos1 += 1) { 
     myservo.write(pos1);              
@@ -194,11 +208,13 @@ void retourne_crochets(){  // cette fontion sert à retourner les crochets
     delay(15);}
   }
 
+
 void retourne_crochet_cremaillere(){ //cette fontion sert à retourner le crochet de la crémaillère
   for (pos2 = a; pos2 >= 0; pos2 -= 1) { 
     myservo2.write(pos2);              
     delay(15);}
   }
+
 
 void descente_crochets(){     // cette fonction sert à décendre les crochets d'un échelon 
   retraction_crochets(); // étape 1 on rétracte les crochets
@@ -211,6 +227,8 @@ void descente_crochets(){     // cette fonction sert à décendre les crochets d
   else {
      avance();  // sinn le moteur tourne dans un sens 
 }}
+
+
 void descente_cremaillere(){ // cette fonction sert à décendre le crochet de la crémaillère
   retraction_crochet_cremaillere(); // étape 1 on rétracte le crochet de la crémaillère
   float distance = ultra_son2(); // si la distance capté par le capteur ultrason n2 est plus petite que 1 alors le moteur s'arrête et on retourne le crochet de la crémaillère
@@ -224,6 +242,8 @@ void descente_cremaillere(){ // cette fonction sert à décendre le crochet de l
   }
  
 }
+
+
 void monte_cremaillere(){ //cette fonction sert à faire monter la crémaillère d'un échelon 
    retraction_crochet_cremaillere();// étape 1 on rétracte le crochet de la crémaillère
    float distance = ultra_son2(); // si la distance capté par le capteur ultrason n2 est plus petite que 1 alors le moteur s'arrête et on retourne le crochet de la crémaillère
@@ -236,6 +256,8 @@ void monte_cremaillere(){ //cette fonction sert à faire monter la crémaillère
     avance(); //sinon le moteur tourne dans un sens 
   }  
 }
+
+
 void monte_crochets(){  //cette fonction sert à faire monter  les crochets  d'un échelon
   retraction_crochets(); // étape 1 on rétracte les crochets
   float distance = ultra_son1(); // si la distance capté par le capteur ultrason n1 est plus petite que 1 alors le moteur s'arrête et on retourne les crochets
