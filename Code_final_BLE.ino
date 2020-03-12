@@ -48,7 +48,7 @@ void setup() {
    digitalWrite(pinTrig1, LOW);
    digitalWrite(pinTrig2, LOW);
    
-   Serial.begin(9600);
+   Serial.begin(115200);
 }
 
 
@@ -132,7 +132,7 @@ void loop() {
 
 
 void avance() {  // le moteur tourne dans un sens 
-  analogWrite (E2,100);    
+  analogWrite (E2,200);    
   digitalWrite(M2,HIGH);
 }  
 
