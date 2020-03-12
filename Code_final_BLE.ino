@@ -1,3 +1,4 @@
+
 #include <Metro.h>
 #include <DFMobile.h>
 #include <GoBLE.h>
@@ -71,25 +72,38 @@ void loop() {
 //    }
 
     if (joystickX > 0) {
-      MONTER = True;
-      DESCENDRE = False;
+      MONTER = true;
+      DESCENDRE = false;
     }
-    else if(joystickX < 0) {
-      DESCENDRE = True;
-      MONTER = False;
+    else if (joystickX < 0) {
+      DESCENDRE = true;
+      MONTER = false;
     }
 
     
     else {
-      MONTER = False;
-      DESCENDRE = False;
+      MONTER = false;
+      DESCENDRE = false;
     }
     
-    if (MONTER && ) {
-      
+
+    if (DESCENDRE == true && capteur_fin_de_course2() == 0){
+        descente_crochets();  // descente des crochets
+        descente_cremaillere(); // décente de la crémaillère
+    }
+    else if (MONTER == true && capteur_fin_de_course1() == 0) {
       monte_cremaillere(); //montée de la crémaillère
       monte_crochets(); // montée des crochets
+    } 
+    else if (DESCENDRE == false && MONTER == false){
+      stopped();
     }
+    else{
+      stopped();
+    }
+    
+    
+    
     
     
 // 
@@ -319,3 +333,5 @@ void monte_crochets(){  //cette fonction sert à faire monter  les crochets  d'u
     back_off(155,155); // sinon le moteur tourne dans l' autre sens (dans le but d'apporter les crochets au même échelon que la crémaillère)
   }
 }
+
+  
