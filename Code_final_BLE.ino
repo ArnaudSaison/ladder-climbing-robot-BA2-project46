@@ -20,7 +20,7 @@ int pinEcho1 = 3; //capteur ultrason1
 int pinTrig2 = 4; //capteur ultrason2
 int pinEcho2 = 5; //capteur ultrason 2
 int joystickX, joystickY; //joystick ble
-int buttonState[10];
+int buttonState[7];
 long temps; 
 float distance;
 const int sensorMin=0;
