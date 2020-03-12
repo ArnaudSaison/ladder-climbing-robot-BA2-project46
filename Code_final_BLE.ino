@@ -212,7 +212,7 @@ int capteur_fin_de_course1(){ //cette fonction nous renvoit si le capteur de fin
       break;
     case 3:
      Serial.println("pas allumé");
-     return 1;
+     return 0;
       break;
     
   }
