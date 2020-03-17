@@ -1,4 +1,3 @@
-
 #include <Metro.h>
 #include <DFMobile.h>
 #include <GoBLE.h>
@@ -164,7 +163,7 @@ float ultra_son1() {digitalWrite(pinTrig1, HIGH);  // cette fonction nous revoit
     Serial.println(" cm");
     
   }
-  delay(2000);
+  delay(2000); // ******* Délai trop grand ********
   return distance;
   
 }
@@ -186,7 +185,7 @@ float ultra_son2() {digitalWrite(pinTrig2, HIGH); // cette fonction nous revoit 
     Serial.println(" cm");
     
   }
-  delay(2000);
+  delay(2000);// ******* Délai trop grand ********
   return distance;
   
 }
@@ -283,11 +282,11 @@ void descente_crochets(){ // cette fonction sert à décendre les crochets d'un 
   float distance = ultra_son1();
   if (distance < 1 ) {  // si la distance capté par le capteur ultrason n1 est plus petite que 1 alors le moteur s'arrête et on retourne les crochets
     stopped();
-    delay(10000); 
+    delay(10000); // ******* Délai trop grand ********
     retourne_crochets();
     }
   else {
-     avance();  // sinn le moteur tourne dans un sens 
+     avance();  // sinon le moteur tourne dans un sens 
   }
 }
 
@@ -297,7 +296,7 @@ void descente_cremaillere(){ // cette fonction sert à décendre le crochet de l
   float distance = ultra_son2(); // si la distance capté par le capteur ultrason n2 est plus petite que 1 alors le moteur s'arrête et on retourne le crochet de la crémaillère
   if(distance<1){
     stopped();
-    delay(10000);
+    delay(10000); // ******* Délai trop grand ********
     retourne_crochet_cremaillere(); 
   }
   else {
@@ -312,7 +311,7 @@ void monte_cremaillere(){ //cette fonction sert à faire monter la crémaillère
   float distance = ultra_son2(); // si la distance capté par le capteur ultrason n2 est plus petite que 1 alors le moteur s'arrête et on retourne le crochet de la crémaillère
   if(distance<1){
     stopped();
-    delay(10000);
+    delay(10000); // ******* Délai trop grand ********
     retourne_crochet_cremaillere(); 
   }
   else {
@@ -326,12 +325,10 @@ void monte_crochets(){  //cette fonction sert à faire monter  les crochets  d'u
   float distance = ultra_son1(); // si la distance capté par le capteur ultrason n1 est plus petite que 1 alors le moteur s'arrête et on retourne les crochets
   if (distance < 1 ) {
     stopped();
-    delay(10000); 
+    delay(10000); // ******* Délai trop grand ********
     retourne_crochets();
   }
   else {
     back_off(155,155); // sinon le moteur tourne dans l' autre sens (dans le but d'apporter les crochets au même échelon que la crémaillère)
   }
 }
-
-  
