@@ -1,7 +1,12 @@
-
 # Robot grimpeur d'échelles et d'aide aux opérations de sauvetage
+**Auteurs** : *Ali Zhara, Castrataro Chiara, Debelle Arthur, Gatti Loïc, Giot Marie, Jabrazko Anass, Massager Louise, Saison Arnaud*
+
+**Sous la supervision de** : *Quitin François*
+
+Dans le cadre du projet de la filière électromécanique de BA2 à L'Ecole Polytechnique de Bruxelles, année académique 2019-2020.
+
 ## License
-Tous les fichiers fournis dans l'archive du projet ansi que le fichier du repository GitHub code_final.ino sont mis à disposition selon les termes de la [License Creative Commons BY-NC-SA (Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions) 4.0 International](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+Tous les fichiers fournis dans l'archive du projet ainsi que le fichier du repository GitHub code_final.ino sont mis à disposition selon les termes de la [License Creative Commons BY-NC-SA (Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions) 4.0 International](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 ## Archive
 Une archive contenant toutes les sources du projet peut être trouvée [ici](https://drive.google.com/drive/folders/1vVeImNS2kArJ3hx-ogVJ2qdK5ueyyH92?usp=sharing).
