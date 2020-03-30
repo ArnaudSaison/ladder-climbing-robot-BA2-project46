@@ -15,7 +15,7 @@ Une archive contenant toutes les sources du projet peut être trouvée [ici](htt
 Le rapport est disponible dans le repository GitHub au format PDF et sur le site [Overleaf au format LaTex](https://www.overleaf.com/read/prnvphzqzdnq).
 
 ## Fichiers 3D
-Tous les fichiers 3D et STL se trouvent dans l'archive, mais il est fortement recommander d'utiliser les liens suivant pour les visionner dans des conditions optimales.
+Tous les fichiers 3D et STL se trouvent dans l'archive, mais il est fortement recommandé d'utiliser les liens suivant pour les visionner dans des conditions optimales.
 
 ### CAD
 Les fichiers au format Fusion 360 sont dispo,ibles au visionnage et au téléchargement dans de nombreux formats ici. Fusion360 est un logiciel édité par [Autodesk](https://www.autodesk.be/fr) gratuit pour les enseignants, étudiants et hobbyistes. Plus d'informations [ici](https://www.autodesk.com/products/fusion-360/students-teachers-educators).
