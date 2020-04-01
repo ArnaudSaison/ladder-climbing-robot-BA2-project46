@@ -86,13 +86,17 @@ void loop() {
     }
     
 
-    if (DESCENDRE == true && capteur_fin_de_course2() == 0){
+   if (DESCENDRE == true && capteur_fin_de_course2() == 0){
         descente_crochets();  // descente des crochets
+        if (pos2==b){
         descente_cremaillere(); // décente de la crémaillère
+        }
     }
     else if (MONTER == true && capteur_fin_de_course1() == 0) {
       monte_cremaillere(); //montée de la crémaillère
+      if (pos1==a){
       monte_crochets(); // montée des crochets
+      }
     } 
     else if (DESCENDRE == false && MONTER == false){
       stopped();
@@ -100,10 +104,6 @@ void loop() {
     else{
       stopped();
     }
-    
-    
-    
-    
     
 // 
 //    while(capteur_fin_de_course1()== 0 and capteur_fin_de_course2() == 0){     
