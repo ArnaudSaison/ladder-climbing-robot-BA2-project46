@@ -57,18 +57,6 @@ void loop() {
     joystickY = Goble.readJoystickY();
     buttonState[SWITCH_SELECT] = Goble.readSwitchSelect();
     buttonState[SWITCH_START]  = Goble.readSwitchStart();
-// 
-//    if (buttonState[SWITCH_START] == PRESSED && //si le boutton start est appuié, le moteur s'allume et la séquence commence
-//        buttonState[SWITCH_SELECT] == RELEASED) {
-//      avance();
-//      Serial.println("Démarrage");
-//    }
-//
-//    if (buttonState[SWITCH_START] == RELEASED &&  //si le boutton select est appuié, le moteur s'étteint et la séquence s'arrête
-//        buttonState[SWITCH_SELECT] == PRESSED) {
-//      stopped();
-//      Serial.println("Arrêt");
-//    }
 
     if (joystickX > 0) {
       MONTER = true;
@@ -104,29 +92,6 @@ void loop() {
     else{
       stopped();
     }
-    
-// 
-//    while(capteur_fin_de_course1()== 0 and capteur_fin_de_course2() == 0){     
-//      //le capteur de fin de course2 est celui qui se trouve à la fin de la crémaillère
-//      // le capteur de fin de course1 est celui qui se trouve au dessus de la crémaillère
-//    
-//      descente_crochets();  // descente des crochets
-        if (pos2==b){
-//      descente_cremaillere(); // décente de la crémaillère
-        }
-//    }
-//    
-//    stopped();
-//    delay(10000);
-//    
-//    if (capteur_fin_de_course2() == 1){ //si le capteur de fin de course 2 a été allumé alors on rentre dans la boucle de la montée.
-//      
-//      while(capteur_fin_de_course1()== 0){ // boucle de la montée tant que le capteur de fin de course 1 n'est pas allumé
-//        monte_cremaillere(); //montée de la crémaillère
-          if (pos1==b){
-//        monte_crochets();} // montée des crochets
-//      }
-//    }
   }
 }
 
