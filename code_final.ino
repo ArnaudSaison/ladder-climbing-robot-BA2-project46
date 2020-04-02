@@ -246,12 +246,12 @@ void retourne_crochet_cremaillere(){ //cette fontion sert à retourner le croche
 
 
 void descente_crochets(){ // cette fonction sert à décendre les crochets d'un échelon 
-  retraction_crochets(); // étape 1 on rétracte les crochets
+  retourne_crochets(); // étape 1 on retourne les crochets
   float distance = ultra_son1();
-  if (distance < 1 ) {  // si la distance capté par le capteur ultrason n1 est plus petite que 1 alors le moteur s'arrête et on retourne les crochets
+  if (distance < 1 ) {  // si la distance capté par le capteur ultrason n1 est plus petite que 1 alors le moteur s'arrête et on rétracte les crochets
     stopped();
-    delay(10000); // ******* Délai trop grand ********
-    retourne_crochets();
+    delay(2000); // ******* Délai trop grand ********
+    retraction_crochets(); 
     }
   else {
      avance();  // sinon le moteur tourne dans un sens 
@@ -260,12 +260,12 @@ void descente_crochets(){ // cette fonction sert à décendre les crochets d'un 
 
 
 void descente_cremaillere(){ // cette fonction sert à décendre le crochet de la crémaillère
-  retraction_crochet_cremaillere(); // étape 1 on rétracte le crochet de la crémaillère
-  float distance = ultra_son2(); // si la distance capté par le capteur ultrason n2 est plus petite que 1 alors le moteur s'arrête et on retourne le crochet de la crémaillère
+ retourne_crochet_cremaillere();  // étape 1 on retourne le crochet de la crémaillère
+  float distance = ultra_son2(); // si la distance capté par le capteur ultrason n2 est plus petite que 1 alors le moteur s'arrête et on rétracte le crochet de la crémaillère
   if(distance<1){
     stopped();
-    delay(10000); // ******* Délai trop grand ********
-    retourne_crochet_cremaillere(); 
+    delay(2000); // ******* Délai trop grand ********
+  retraction_crochet_cremaillere(); 
   }
   else {
     back_off(155,155); // sinon le moteur tourne dans l' autre sens (dans le but d'apporter la crémaillère au même échelon que les crochets)
@@ -275,12 +275,12 @@ void descente_cremaillere(){ // cette fonction sert à décendre le crochet de l
 
 
 void monte_cremaillere(){ //cette fonction sert à faire monter la crémaillère d'un échelon 
-  retraction_crochet_cremaillere();// étape 1 on rétracte le crochet de la crémaillère
-  float distance = ultra_son2(); // si la distance capté par le capteur ultrason n2 est plus petite que 1 alors le moteur s'arrête et on retourne le crochet de la crémaillère
+  retourne_crochet_cremaillere();// étape 1 on retourne le crochet de la crémaillère
+  float distance = ultra_son2(); // si la distance capté par le capteur ultrason n2 est plus petite que 1 alors le moteur s'arrête et on rétracte le crochet de la crémaillère
   if(distance<1){
     stopped();
-    delay(10000); // ******* Délai trop grand ********
-    retourne_crochet_cremaillere(); 
+    delay(2000); // ******* Délai trop grand ********
+    retraction_crochet_cremaillere(); 
   }
   else {
     avance(); //sinon le moteur tourne dans un sens 
@@ -289,12 +289,12 @@ void monte_cremaillere(){ //cette fonction sert à faire monter la crémaillère
 
 
 void monte_crochets(){  //cette fonction sert à faire monter  les crochets  d'un échelon
-  retraction_crochets(); // étape 1 on rétracte les crochets
-  float distance = ultra_son1(); // si la distance capté par le capteur ultrason n1 est plus petite que 1 alors le moteur s'arrête et on retourne les crochets
+   retourne_crochets();// étape 1 on retourne les crochets
+  float distance = ultra_son1(); // si la distance capté par le capteur ultrason n1 est plus petite que 1 alors le moteur s'arrête et on rétracte les crochets
   if (distance < 1 ) {
     stopped();
-    delay(10000); // ******* Délai trop grand ********
-    retourne_crochets();
+    delay(2000); // ******* Délai trop grand ********
+   retraction_crochets(); ;
   }
   else {
     back_off(155,155); // sinon le moteur tourne dans l' autre sens (dans le but d'apporter les crochets au même échelon que la crémaillère)
