@@ -131,7 +131,7 @@ float ultra_son1() {digitalWrite(pinTrig1, HIGH);  // cette fonction nous revoit
     Serial.println(" cm");
     
   }
-  delay(2000); // ******* Délai trop grand ********
+  delay(2000);
   return distance;
   
 }
@@ -153,7 +153,7 @@ float ultra_son2() {digitalWrite(pinTrig2, HIGH); // cette fonction nous revoit 
     Serial.println(" cm");
     
   }
-  delay(2000);// ******* Délai trop grand ********
+  delay(2000);
   return distance;
   
 }
@@ -250,7 +250,7 @@ void descente_crochets(){ // cette fonction sert à décendre les crochets d'un 
   float distance = ultra_son1();
   if (distance < 1 ) {  // si la distance capté par le capteur ultrason n1 est plus petite que 1 alors le moteur s'arrête et on rétracte les crochets
     stopped();
-    delay(2000); // ******* Délai trop grand ********
+    delay(2000);
     retraction_crochets(); 
     }
   else {
@@ -264,7 +264,7 @@ void descente_cremaillere(){ // cette fonction sert à décendre le crochet de l
   float distance = ultra_son2(); // si la distance capté par le capteur ultrason n2 est plus petite que 1 alors le moteur s'arrête et on rétracte le crochet de la crémaillère
   if(distance<1){
     stopped();
-    delay(2000); // ******* Délai trop grand ********
+    delay(2000);
   retraction_crochet_cremaillere(); 
   }
   else {
@@ -279,7 +279,7 @@ void monte_cremaillere(){ //cette fonction sert à faire monter la crémaillère
   float distance = ultra_son2(); // si la distance capté par le capteur ultrason n2 est plus petite que 1 alors le moteur s'arrête et on rétracte le crochet de la crémaillère
   if(distance<1){
     stopped();
-    delay(2000); // ******* Délai trop grand ********
+    delay(2000);
     retraction_crochet_cremaillere(); 
   }
   else {
@@ -293,7 +293,7 @@ void monte_crochets(){  //cette fonction sert à faire monter  les crochets  d'u
   float distance = ultra_son1(); // si la distance capté par le capteur ultrason n1 est plus petite que 1 alors le moteur s'arrête et on rétracte les crochets
   if (distance < 1 ) {
     stopped();
-    delay(2000); // ******* Délai trop grand ********
+    delay(2000);
    retraction_crochets(); ;
   }
   else {
