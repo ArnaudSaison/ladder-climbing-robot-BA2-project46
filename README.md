@@ -18,7 +18,7 @@ Le rapport est disponible dans le repository GitHub au format PDF et sur le site
 Tous les fichiers 3D et STL se trouvent dans l'archive, mais il est fortement recommandé d'utiliser les liens suivant pour les visionner dans des conditions optimales.
 
 ### CAD
-Les fichiers au format Fusion 360 sont dispo,ibles au visionnage et au téléchargement dans de nombreux formats ici. Fusion360 est un logiciel édité par [Autodesk](https://www.autodesk.be/fr) gratuit pour les enseignants, étudiants et hobbyistes. Plus d'informations [ici](https://www.autodesk.com/products/fusion-360/students-teachers-educators).
+Les fichiers au format Fusion 360 sont dispoibles au [visionnage et au téléchargement dans de nombreux formats ici](https://a360.co/33EKLTD). Fusion360 est un logiciel édité par [Autodesk](https://www.autodesk.be/fr) gratuit pour les enseignants, étudiants et hobbyistes. Plus d'informations [ici](https://www.autodesk.com/products/fusion-360/students-teachers-educators).
 
 ### STL
 Les fichiers utilisés pour imprimer les pièces qui doivent l'être en 3D, en plus de pouvoir être directement exportés de Fusion 360 et de se trouver dans l'archive, sont disponibles :
